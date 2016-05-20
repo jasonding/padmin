@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans default-autowire="byName"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-autowire-candidates="byName"
+       xmlns:util="http://www.springframework.org/schema/util">
+
+    <util:constant id="consumerActivateMailType" static-field="com.hrin.admin.domain.enumeration.MailType.CONSUMER_ACTIVATE"></util:constant>
+    <util:constant id="consumerRetrieveMailType" static-field="com.hrin.admin.domain.enumeration.MailType.CONSUMER_RETRIEVE"></util:constant>
+    <util:constant id="companyActivateMailType" static-field="com.hrin.admin.domain.enumeration.MailType.COMPANY_ACTIVATE"></util:constant>
+    <util:constant id="companyRetrieveMailType" static-field="com.hrin.admin.domain.enumeration.MailType.COMPANY_RETRIEVE"></util:constant>
+    <util:map id="aa" key-type="com.hrin.admin.domain.enumeration.MailType" value-type="java.lang.String">
+        <entry key-ref="consumerActivateMailType" value="aaaa"></entry>
+        <entry key-ref="consumerRetrieveMailType" value="bbbb"></entry>
+        <entry key-ref="companyActivateMailType" value="cccc"></entry>
+        <entry key-ref="companyRetrieveMailType" value="dddd"></entry>
+    </util:map>
+</beans>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+        version="2.1">
+	<!-- 标签库版本-->
+	<tlib-version>2.2</tlib-version>
+	<!-- 标签库名称-->
+	<short-name>hr</short-name>
+	<!-- 标签库URI-->
+	<uri>/hrinTag</uri>
+	<!-- 标签库中的标签-->
+	<tag>
+		<!-- 标签名称-->
+		<name>permission</name>
+		<!-- 标签对应的处理类-->
+		<tag-class>com.hrin.admin.web.tag.PermissionTag</tag-class>
+		<!-- 标签体内容,没有标签体则设为empty-->
+		<body-content>scriptless</body-content>
+		<attribute>
+			<description><![CDATA[请求地址]]></description>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+		<attribute>
+			<description><![CDATA[请求方法]]></description>
+			<name>method</name>
+			<required>true</required>
+			<rtexprvalue>false</rtexprvalue>
+		</attribute>
+	</tag>
+</taglib>

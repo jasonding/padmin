@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+
+    <http pattern="/manage/login.do"  security="none"></http>
+    <http pattern="/css/**" security="none"></http>
+    <http pattern="/js/**" security="none"></http>
+    <http>
+        <form-login default-target-url="/manage/main"
+                login-page="/manage/login.do"
+                login-processing-url="/manage/login"
+                authentication-failure-url="/manage/login.do"
+        />
+		<logout logout-success-url="/manage/login.do" logout-url="/manage/logout"/>
+        <custom-filter ref="validateRandomCodeFilter" before="FORM_LOGIN_FILTER"></custom-filter>
+        <custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR"></custom-filter>
+	</http>
+
+    <!-- 添加验证码过滤器 -->
+    <beans:bean id="validateRandomCodeFilter" class="com.hrin.admin.service.security.ValidateRandomCodeFilter">
+        <beans:property name="filterProcessesUrl" value="/manage/login" />
+        <beans:property name="filterRedirectUrl"  value="/manage/login.do" />
+    </beans:bean>
+
+    <beans:bean id="md5PasswordEncoder" class="org.springframework.security.authentication.encoding.Md5PasswordEncoder">
+        <beans:property name="encodeHashAsBase64" value="true"></beans:property>
+    </beans:bean>
+
+    <beans:bean id="daoAuthenticationProvider" class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">
+        <beans:property name="userDetailsService" ref="userDetailsService"></beans:property>
+        <beans:property name="hideUserNotFoundExceptions" value="false"></beans:property>
+        <beans:property name="passwordEncoder" ref="md5PasswordEncoder"></beans:property>
+    </beans:bean>
+
+    <!--<beans:bean id="authenticationManager" class="org.springframework.security.authentication.ProviderManager">-->
+        <!--<beans:constructor-arg>-->
+            <!--<beans:list>-->
+                <!--<beans:ref local="daoAuthenticationProvider" />-->
+            <!--</beans:list>-->
+        <!--</beans:constructor-arg>-->
+    <!--</beans:bean>-->
+
+    <beans:bean id="filterSecurityInterceptor" class="org.springframework.security.web.access.intercept.FilterSecurityInterceptor" autowire="byType">
+        <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+        <beans:property name="securityMetadataSource" ref="hrinDefaultFilterInvocationSecurityMetadataSource"></beans:property>
+    </beans:bean>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider ref="daoAuthenticationProvider" />
+	</authentication-manager>
+</beans:beans>
+
