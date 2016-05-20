@@ -15,25 +15,6 @@
         <org.spring-security.version>3.2.5.RELEASE</org.spring-security.version>
     </properties>
 
-
-    <repositories>
-        <repository>
-            <id>hrin-nexus-releases</id>
-            <name>hrin-nexus-releases</name>
-            <url>http://116.255.219.248:8081/nexus/content/repositories/releases/</url>
-        </repository>
-        <repository>
-            <id>hrin-nexus-snapshot</id>
-            <name>hrin-nexus-snapshot</name>
-            <url>http://116.255.219.248:8081/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <!--<repository>-->
-            <!--<id>central</id>-->
-            <!--<name>Central</name>-->
-            <!--<url>http://116.255.219.248:8081/nexus/content/repositories/central/</url>-->
-        <!--</repository>-->
-    </repositories>
-
   <dependencies>
 
       <dependency>
